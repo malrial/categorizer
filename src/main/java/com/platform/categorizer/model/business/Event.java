@@ -1,9 +1,20 @@
 package com.platform.categorizer.model.business;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Event {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.RedisHash;
+@RedisHash("Event")
+
+public class Event implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private String name;
 	private Date ts;
 	
