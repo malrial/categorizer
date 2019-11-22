@@ -34,8 +34,8 @@ public class CategorizerController {
 
     // Acceso a pagina api: http://localhost:8080/swagger-ui/index.html
 	
-    @Tag(name = "categories", description = "the categories API")
-    @Operation(summary = "List categories", description = "List all categories", tags = { "categories" })
+    @Tag(name = "Events", description = "the events API")
+    @Operation(summary = "save event", description = "save event", tags = { "Events" })
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation",
     content = @Content(array = @ArraySchema(schema = @Schema(implementation = Event.class)))) })	
 
@@ -52,12 +52,20 @@ public class CategorizerController {
                             
     }
     
+    @Operation(summary = "get event", description = "get event", tags = { "Events" })
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation",
+    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Event.class)))) })
+    
     @GetMapping(value = "/event/get", produces = { "application/json" })
     public Optional<Event> getEvent(@RequestParam(value="name") String name) {
     	logger.info("getEvent");
     	return eventManager.getEvent(name);
                             
     }
+    
+    @Operation(summary = "get all events", description = "get all events", tags = { "Events" })
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation",
+    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Event.class)))) })
     
     @GetMapping(value = "/event/getAll", produces = { "application/json" })
     public List<Event> getAllEvent() {
