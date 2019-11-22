@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<!--     <p th:text="'Hello, ' + ${day} + '!'" /> -->
+<!--      <p th:text="'Hello, ' + ${menu} + '!'" /> -->
+     
+     <table>
+     	<th:block th:each="day : ${days}">
+     		<tr>
+     			<td th:text="'Hello, ' + ${day.date} + '!'"></td>
+     			<td th:text="'Hello, ' + ${day.menu} + '!'"></td>
+     		</tr>
+     	</th:block>
+     </table>
+     
+</body>
+</html>

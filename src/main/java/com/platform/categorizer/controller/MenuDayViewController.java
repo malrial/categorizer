@@ -20,37 +20,35 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@RestController
-public class MenuDayController {
+@Controller
+public class MenuDayViewController {
 	
 	@Autowired
 	private IMenuDayManager iMenuDayManager; 
 	
-	@Tag(name = "Calendar", description = "the calendar API")
-    
 	
-	@Operation(summary = "create day", description = "create day", tags = { "Calendar" })
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation",
-    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Day.class)))) })	
 
-	@GetMapping(value = "/calendar/createDay", produces = { "application/json" })
-	public Day createDay(){
+
+	
+	@GetMapping(value = "/calendar/web/createDay", produces = { "application/json" })
+	public String createDayView(Model model){
 		
-		return iMenuDayManager.createDay();
+		Day day = iMenuDayManager.createDay(); 
+		
+		model.addAttribute("day", day.getDate());
+		model.addAttribute("menu", day.getMenu());
+		return "calendar";
 		
 	}
 	
 
 	
-	
-	@Operation(summary = "gat all days", description = "get All Days", tags = { "Calendar" })
-    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation",
-    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Day.class)))) })	
-	
-	@GetMapping(value = "/calendar/days", produces = { "application/json" })
-	public List<Day> getDays(){
+	@GetMapping(value = "/calendar/web/days", produces = { "application/json" })
+	public String getDays(Model model){
 		
-		return iMenuDayManager.getDays();
+		model.addAttribute("days",iMenuDayManager.getDays());
+		
+		return "calendar";
 		
 	}
 
